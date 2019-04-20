@@ -216,10 +216,10 @@ namespace GEA
 
             #endregion
 
-            List<double> tempDividend = new List<double> { -3, 1, 0, -1, 1 };
-            List<double> tempDivisor = new List<double> { 1, 1, 0, 1 };
+            List<double> tempDividend = new List<double> (dividend);
+            List<double> tempDivisor = new List<double> (divisor);
             List<double> temp = new List<double>(remainder);
-
+            List<double> tempNOD = new List<double>();
             bool flag = false;
 
             while (true)
@@ -244,18 +244,21 @@ namespace GEA
                 MyMath.Deconv(tempDividend, tempDivisor, out quotient, out remainder);
             }
 
-            NOD = new List<double>(remainder);
+            tempNOD = new List<double>(remainder);
 
             Console.WriteLine("НОД");
 
-            Print(NOD);
+            Print(tempNOD);
 
             List<double> V = new List<double>();
-            List<double> U = new List<double> {};
+            List<double> U = new List<double>();
 
-            MyMath.gcd(dividend, divisor, out V, out U);
+            NOD = MyMath.gcd(dividend, divisor, out V, out U);
 
-            Console.WriteLine("Линейное представление многочлена: \nU(x)*F(x) + V(x)*G(x) = NOD");
+            if (MyMath.Equal(tempNOD, NOD))
+                Console.WriteLine("НОД верны, руками тоже работает!!!");        
+
+            Console.WriteLine("\nЛинейное представление многочлена: \nU(x)*F(x) + V(x)*G(x) = NOD");
 
             //Console.WriteLine("F(x):");
 
